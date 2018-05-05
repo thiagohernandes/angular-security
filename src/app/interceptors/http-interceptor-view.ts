@@ -15,6 +15,16 @@ export class HttpInterceptorView implements HttpInterceptor {
             const authReq = req.clone({ headers: req.headers.set("meuValor", "TesteThiago")});
             console.log(" ******** Enviando o request com novo valor no HEADER ********");
             
+            if(localStorage.getItem('meu-token')){
+                req = req.clone({
+                    setHeaders: {
+                        Authorization: `${localStorage.getItem('meu-token')}`
+                    }
+                });
+            } else{
+                return Observable.throw("******** Não foi possível realizar a requisição! ********");
+            }
+
             return next.handle(authReq)
                 .catch((error, caught) => {
                         console.log("******** Ocorreu erro ao interceptar! ********");

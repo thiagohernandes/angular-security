@@ -28,4 +28,9 @@ export class AppComponent {
       }
     );
   }
+
+  registarTokenSimples(): void {
+    localStorage.setItem('meu-token','123456-xyz');
+  }
+
 }
